@@ -61,6 +61,9 @@ npm i -D @types/bcryptjs
 ~~~~ javaScript
 npm i vitest vite-tsconfig-paths -D
 ~~~~
+~~~~ javaScript
+npm i -D @vitest/ui
+~~~~
 
 ## Executar Pacotes
 
