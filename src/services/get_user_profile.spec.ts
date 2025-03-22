@@ -1,4 +1,4 @@
-import { inMemoryUserRepository } from "@/repositories/in-memory/in-memory-user-repository"
+import { inMemoryUserRepository } from "@/repositories/in-memory/in-memory-users-repository"
 import { beforeEach, describe, expect, it } from "vitest"
 import { GetUserProfileService } from "./get_user_profile"
 import { ResourceNotExists } from "./errors/resource-not-exists"
@@ -27,7 +27,7 @@ describe('get user profile service', () => {
 
     it('should be able to get user profile with wrong id', async () => {
 
-        expect(()=>
+        await expect(()=>
             sut.execute({
                 userId: "id-not-found"
             })

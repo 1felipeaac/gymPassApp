@@ -11,14 +11,14 @@ GymPass style app.
 - [ ] Deve ser possível o usuário obter seu histórico de check-ins;
 - [ ] Deve ser possível o usuário buscar academias próximas;
 - [ ] Deve ser possível o usuário buscar academias pelo nome;
-- [ ] Deve ser possível o usuário realizar check-in em uma academia;
+- [✅] Deve ser possível o usuário realizar check-in em uma academia;
 - [ ] Deve ser possível validar o check-in de um usuário;
 - [ ] Deve ser possível cadastrar uma academia;
 
 ## RNs (Regras de negócio)
 
 - [✅] O usuário não pode se cadastrar com um e-mail duplicado;
-- [ ] O usuário não pode fazer 2 check-ins no mesmo dia;
+- [✅] O usuário não pode fazer 2 check-ins no mesmo dia;
 - [ ] O usuário não pode fazer check-in a mais de 100m da academia;
 - [ ] O check-in só pode ser validado até 20 minutos depois de ser criados;
 - [ ] O check-in só pode ser validado por administradores;  
@@ -63,6 +63,9 @@ npm i vitest vite-tsconfig-paths -D
 ~~~~
 ~~~~ javaScript
 npm i -D @vitest/ui
+~~~~
+~~~~ javaScript
+npm i dayjs
 ~~~~
 
 ## Executar Pacotes
