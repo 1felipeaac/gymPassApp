@@ -5,8 +5,8 @@ GymPass style app.
 ## RFs (Requisitos funcionais)
 
 - [✅] Deve ser possível se cadastrar;
-- [ ] Deve ser possível se autenticar;
-- [ ] Deve ser possível obter o perfil de um usuario logado;
+- [✅] Deve ser possível se autenticar;
+- [✅] Deve ser possível obter o perfil de um usuario logado;
 - [ ] Deve ser possível obter o número de check-ins realizados pelo usuário logado;
 - [ ] Deve ser possível o usuário obter seu histórico de check-ins;
 - [ ] Deve ser possível o usuário buscar academias próximas;
@@ -27,7 +27,7 @@ GymPass style app.
 ## RNFs (Requisitos não-funcionais)
 
 - [✅] A senha do usuário deve ser criptografada;
-- [ ] Os dados da aplicação precisam estar persistodos em um banco PostgresSQL;
+- [✅] Os dados da aplicação precisam estar persistodos em um banco PostgresSQL;
 - [ ] Todas as listas de dados precisam estar paginadas com 20 itens por página;
 - [ ] O usuário deve ser identificado por um JWT (JSON Web Token)
 
@@ -75,4 +75,8 @@ npx prisma init
 ~~~~
 ~~~~ javaScript
 npx prisma generate
+~~~~
+>finalizar processo do postgres no localhost
+~~~~ javaScript
+npx prisma migrate dev
 ~~~~

@@ -1,16 +1,21 @@
 import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository'
-import {expect, describe, it} from 'vitest'
+import {expect, describe, it, beforeEach} from 'vitest'
 import { RegisterService } from './register'
 import { compare } from 'bcryptjs'
 import { inMemoryUserRepository } from '@/repositories/in-memory/in-memory-user-repository'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 
+let userRepository : inMemoryUserRepository
+let sut :RegisterService
 describe('register service', () => {
+    beforeEach(() => {
+         userRepository = new inMemoryUserRepository()
+         sut = new RegisterService(userRepository)
+    })
     it('should be able to register', async () => {
-        const userRepository = new inMemoryUserRepository()
-        const registerService = new RegisterService(userRepository)
+        
 
-        const {user} = await registerService.execute({
+        const {user} = await sut.execute({
             name: "Felipe",
             email: "felipe@prisma.com",
             password:"123456"
@@ -20,10 +25,8 @@ describe('register service', () => {
     })
 
     it('should hash user password upon registration', async () => {
-        const userRepository = new inMemoryUserRepository()
-        const registerService = new RegisterService(userRepository)
 
-        const {user} = await registerService.execute({
+        const {user} = await sut.execute({
             name: "Felipe",
             email: "felipe@prisma.com",
             password:"123456"
@@ -35,12 +38,10 @@ describe('register service', () => {
     })
 
     it('should not be able to register with same email twice', async () => {
-        const userRepository = new inMemoryUserRepository()
-        const registerService = new RegisterService(userRepository)
-
+       
         const email = "felipe@prisma.com"
 
-        await registerService.execute({
+        await sut.execute({
             name: "Felipe",
             email,
             password:"123456"
@@ -48,7 +49,7 @@ describe('register service', () => {
 
 
         await expect(() => 
-            registerService.execute({
+            sut.execute({
             name: "Felipe",
             email,
             password:"123456"

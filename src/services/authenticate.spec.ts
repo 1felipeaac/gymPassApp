@@ -1,13 +1,19 @@
-import {expect, describe, it} from 'vitest'
+import {expect, describe, it, beforeEach} from 'vitest'
 import { compare, hash } from 'bcryptjs'
 import { inMemoryUserRepository } from '@/repositories/in-memory/in-memory-user-repository'
 import { AuthenticateService } from './authenticate'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
+import { RegisterService } from './register'
 
+let userRepository : inMemoryUserRepository
+let sut :AuthenticateService
 describe('authenticate service', () => {
+
+    beforeEach(() => {
+        userRepository = new inMemoryUserRepository()
+        sut = new AuthenticateService(userRepository)
+   })
     it('should not be able to authenticate', async () => {
-        const userRepository = new inMemoryUserRepository()
-        const sut = new AuthenticateService(userRepository)
 
         await userRepository.create({
             name: 'Felipe',
@@ -24,8 +30,7 @@ describe('authenticate service', () => {
     })
 
     it('should not be able to authenticate with wrong password', async () => {
-        const userRepository = new inMemoryUserRepository()
-        const sut = new AuthenticateService(userRepository)
+    
 
         await userRepository.create({
             name: 'Felipe',
@@ -43,8 +48,6 @@ describe('authenticate service', () => {
     })
 
     it('should not be able to authenticate with wrong email', async () => {
-        const userRepository = new inMemoryUserRepository()
-        const sut = new AuthenticateService(userRepository)
      
         expect(()=>
             sut.execute({
