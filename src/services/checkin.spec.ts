@@ -103,6 +103,4 @@ describe('Checkin service', () => {
         })).rejects.toBeInstanceOf(MaxDistanceError);
     })
 
-
-
 })
