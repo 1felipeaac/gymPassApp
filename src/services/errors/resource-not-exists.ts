@@ -1,4 +1,4 @@
-export class ResourceNotExists extends Error{
+export class ResourceNotExistsError extends Error{
     constructor(){
         super("Registro não encontrado!")
     }

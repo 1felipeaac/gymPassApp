@@ -1,7 +1,8 @@
 import { inMemoryCheckInRepository } from "@/repositories/in-memory/in-memory-checkIns-repository"
 import { ValidateCheckinService } from "./validate-checkin"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
-import { ResourceNotExists } from "./errors/resource-not-exists"
+import { ResourceNotExistsError } from "./errors/resource-not-exists"
+import dayjs from "dayjs"
 
 let checkinRepository : inMemoryCheckInRepository
 let sut :ValidateCheckinService
@@ -11,10 +12,10 @@ describe('Validate Checkin service', () => {
         sut = new ValidateCheckinService(checkinRepository)
 
 
-        // vi.useFakeTimers()
+        vi.useFakeTimers()
     })
     afterEach(() =>{
-        // vi.useRealTimers()
+        vi.useRealTimers()
     })
     it('should be able to validate the checkin', async () => {
 
@@ -35,7 +36,23 @@ describe('Validate Checkin service', () => {
 
         await expect(() => sut.execute({
             checkinId: "inexistent-checkin-id"
-        })).rejects.toBeInstanceOf(ResourceNotExists)
+        })).rejects.toBeInstanceOf(ResourceNotExistsError)
+    })
+
+    it('should not be abe to validate the checkin after 20 minutes of its creation', async () => {
+        vi.setSystemTime(new Date(2025,2,24,17,28))
+        const createdCheckin = await checkinRepository.create({
+            gym_id: "gym-01",
+            user_id: "user-01",
+        })
+
+        const vinteUmMinutosEmMs = 1000 * 60 * 21
+
+        vi.advanceTimersByTime(vinteUmMinutosEmMs)
+
+        await expect (() => sut.execute({
+            checkinId: createdCheckin.id
+        })).rejects.toBeInstanceOf(Error)
     })
 
 })
