@@ -2,7 +2,7 @@ import { UserRepository } from "@/repositories/usersRepository";
 import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
 import { compare } from "bcryptjs";
 import { User } from "@prisma/client";
-import { ResourceNotExists } from "./errors/resource-not-exists";
+import { ResourceNotExistsError } from "./errors/resource-not-exists";
 
 interface GetUserProfileServiceRequest{
     userId:string,
@@ -22,7 +22,7 @@ export class GetUserProfileService{
     }:GetUserProfileServiceRequest):Promise<GetUserProfileServiceResponse>{
         const user = await this.usersRepository.findById(userId);
         if(!user){
-            throw new ResourceNotExists()
+            throw new ResourceNotExistsError()
         }
 
         return {user}
