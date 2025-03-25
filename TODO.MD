@@ -14,7 +14,6 @@ GymPass style app.
 - [✅] Deve ser possível o usuário realizar check-in em uma academia;
 - [✅] Deve ser possível validar o check-in de um usuário;
 - [✅] Deve ser possível cadastrar uma academia;
->>>>>>> 8fc6ebcd6cb6d9d9e535ad3ce6a22a6cbc37237f
 
 ## RNs (Regras de negócio)
 
