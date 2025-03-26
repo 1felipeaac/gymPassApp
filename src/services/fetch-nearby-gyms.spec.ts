@@ -1,15 +1,15 @@
 import { inMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository"
-import { FetchNearbyGymsGymService } from "./fetch-nearby-gyms"
+import { FetchNearbyGymsService } from "./fetch-nearby-gyms"
 import { beforeEach, describe, expect, it } from "vitest"
 
 let gymRepository : inMemoryGymsRepository
-let sut : FetchNearbyGymsGymService
+let sut : FetchNearbyGymsService
 const latitude = -5.1421768
 const longitude = -42.8345395
 describe('fetch nearby user gyms service', () => {
     beforeEach(async () => {
         gymRepository = new inMemoryGymsRepository()
-        sut = new FetchNearbyGymsGymService(gymRepository)
+        sut = new FetchNearbyGymsService(gymRepository)
 
         })
     it('should be able to fetch nearby gyms', async () => {

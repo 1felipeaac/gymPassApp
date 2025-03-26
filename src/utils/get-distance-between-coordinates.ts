@@ -29,3 +29,6 @@ export function getDistanceBetweenCoordinates(from: Coordinate, to: Coordinate){
     
       return dist
 }
+
+export const latitude = -5.1421768
+export const longitude = -42.8345395

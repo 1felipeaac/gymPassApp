@@ -37,6 +37,21 @@ npm i -D @vitest/ui
 ~~~~ javaScript
 npm i dayjs
 ~~~~
+~~~~ javaScript
+npm i @fastify/jwt
+~~~~
+~~~~ javaScript	
+npm i -D tsx
+~~~~
+~~~~ javaScript	
+//executar scripts em qualquer SO
+npm i -D npm-run-all
+~~~~
+~~~~ javaScript
+//fazer requisições http nos testes
+npm i supertest -D
+npm i --save-dev @types/supertest
+~~~~
 
 ## Executar Pacotes
 

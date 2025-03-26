@@ -3,26 +3,26 @@ import { inMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-
 import { Gym } from "@prisma/client"
 
 let gymRepository : inMemoryGymsRepository
-let sut : FetchNearbyGymsGymService
+let sut : FetchNearbyGymsService
 const latitude = -5.1421768
 const longitude = -42.8345395
-interface FetchNearbyGymsGymServiceRequest{
+interface FetchNearbyGymsServiceRequest{
     userLatitude: number,
     userLongitude: number,
 }
 
-interface FetchNearbyGymsGymServiceResponse{
+interface FetchNearbyGymsServiceResponse{
     gyms: Gym[]
 }
 
-export class FetchNearbyGymsGymService{
+export class FetchNearbyGymsService{
     
     constructor(private gymRepository: GymsRepository){}
 
     async execute({
         userLatitude,
         userLongitude
-    }: FetchNearbyGymsGymServiceRequest):Promise<FetchNearbyGymsGymServiceResponse>{
+    }: FetchNearbyGymsServiceRequest):Promise<FetchNearbyGymsServiceResponse>{
         
         const gyms = await this.gymRepository.findManyNearby({
             latitude: userLatitude, 
