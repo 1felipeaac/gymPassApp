@@ -5,7 +5,7 @@ import { latitude, longitude } from "@/utils/get-distance-between-coordinates"
 import { createAndAuthenticateUser } from "@/utils/test/create-and-authenticate-user"
 import { prisma } from "@/lib/prisma"
 
-describe('Metrics (e2e)', () => {
+describe('Validate Checkin (e2e)', () => {
     beforeAll(async () => {
         await app.ready()
     })
@@ -14,7 +14,7 @@ describe('Metrics (e2e)', () => {
         await app.close()
     })
 
-    it('should be able to get the total count of checkin', async () => {
+    it('should be able to validate a checkin', async () => {
 
         const {token} = await createAndAuthenticateUser(app)
 
@@ -22,32 +22,34 @@ describe('Metrics (e2e)', () => {
 
         const gym = await prisma.gym.create({
             data:{
-                title: 'JavaScript Gym',
+                title: "JS GYM",
+                description: "Request.body builder",
+                phone: "00999999999",
                 latitude: latitude,
-                longitude: longitude,
+                longitude: longitude
             }
         })
 
-        await prisma.checkin.createMany({
-            data: [
-                {
-                    gym_id: gym.id,
-                    user_id: user.id
-                },
-                {
-                    gym_id: gym.id,
-                    user_id: user.id
-                },
-            ]
+        let checkin = await prisma.checkin.create({
+            data:{
+                gym_id: gym.id,
+                user_id: user.id
+            }
         })
 
         const response = await request(app.server)
-            .get('/checkins/metrics')
+            .patch(`/checkins/${checkin.id}/validate`)
             .set('Authorization', `Bearer ${token}`)
             .send()
 
-        console.log(response.body)
-        expect(response.statusCode).toEqual(200)
-        expect(response.body.checkinsCount).toEqual(0)//2
+        expect(response.statusCode).toEqual(204)
+
+        checkin = await prisma.checkin.findFirstOrThrow({
+            where:{
+                id: checkin.id
+            }
+        })
+
+        expect(checkin.validated_at).toEqual(expect.any(Date))
     })
 })
