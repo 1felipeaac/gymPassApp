@@ -44,16 +44,13 @@ npm i @fastify/jwt
 npm i -D tsx
 ~~~~
 ~~~~ javaScript	
-//executar scripts em qualquer SO
 npm i -D npm-run-all
 ~~~~
 ~~~~ javaScript
-//fazer requisições http nos testes
 npm i supertest -D
 npm i --save-dev @types/supertest
 ~~~~
 ~~~~ javaScript	
-//habilitar coockies
 npm i @fastify/cookie
 ~~~~
 
