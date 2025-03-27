@@ -52,6 +52,10 @@ npm i -D npm-run-all
 npm i supertest -D
 npm i --save-dev @types/supertest
 ~~~~
+~~~~ javaScript	
+//habilitar coockies
+npm i @fastify/cookie
+~~~~
 
 ## Executar Pacotes
 
@@ -68,3 +72,4 @@ npx prisma generate
 ~~~~ javaScript
 npx prisma migrate dev
 ~~~~
+
